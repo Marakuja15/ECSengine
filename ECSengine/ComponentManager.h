@@ -5,6 +5,7 @@
 #include <typeindex>
 #include <memory>
 #include "EntityManager.h"
+
 class ComponentManager {
 public:
     template<typename T>
@@ -32,6 +33,12 @@ public:
         arr->Remove(entity);
 
 	}
+
+    void RemoveEntity(Entity entity) {
+        for (auto& pair : componentArrays) {
+            pair.second->Remove(entity);
+		}
+    }
 private:
     template<typename T>
     ComponentArray<T>* RequireComponentArray() {
