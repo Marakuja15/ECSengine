@@ -4,6 +4,7 @@
 class IComponentArray {
 public:
 	virtual ~IComponentArray() = default;
+	virtual void Remove(Entity entity) = 0;
 };
 template<typename T>
 
@@ -14,9 +15,17 @@ public:
 	{
 		componentMap[entity] = component;
 	}
-	T& Get(Entity entity)
+	T* Get(Entity entity)
 	{
-		return componentMap[entity];
+		auto it = componentMap.find(entity);
+		if (it == componentMap.end()) {
+			return nullptr;
+		}
+		return &(it->second);
+	}
+	void Remove(Entity entity) override
+	{	
+		componentMap.erase(entity);
 	}
 	bool Has(Entity entity)
 	{

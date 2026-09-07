@@ -6,6 +6,7 @@
 #include "vector"
 #include "unordered_map"
 #include "EntityManager.h"
+#include "ComponentManager.h"
 using namespace std;
 
 struct Position {
@@ -27,10 +28,35 @@ int main()
 		
     }
 	const auto& entities = entityManager->getEntities();
-
+	std::unique_ptr<ComponentManager> componentManager = std::make_unique<ComponentManager>();
+    componentManager->AddComponent(Position{ 10.0f, 5.0f }, entities[0]);
     for (const auto& entity : entities) {
         std::cout << entity << std::endl;
+        
     }
+    Position* pos = componentManager->GetComponent<Position>(entities[0]);
+    if (pos != nullptr) {
+		std::cout << pos->x << pos->y << std::endl;
+        pos->x = 60.0f;
+        std::cout << pos->x << pos->y << std::endl;
+    }
+    else {
+		std::cout << "Position component not found for entity " << entities[0] << std::endl;
+    }
+    Position* pos2 = componentManager->GetComponent<Position>(entities[1]);
+    if (pos2 != nullptr) {
+        std::cout << pos2->x << pos2->y << std::endl;
+       
+    }
+    else {
+        std::cout << "Position component not found for entity " << entities[1] << std::endl;
+
+    }
+	bool has = componentManager->HasComponent<Position>(entities[0]);
+	cout << "Entity " << entities[0] << " has Position component: " << (has ? "true" : "false") << std::endl;
+	bool has2 = componentManager->HasComponent<Position>(entities[1]);
+	cout << "Entity " << entities[1] << " has Position component: " << (has2 ? "true" : "false") << std::endl;
+
     //
     //std::unique_ptr<IComponentArray> arr = std::make_unique<ComponentArray<Position>>();
 

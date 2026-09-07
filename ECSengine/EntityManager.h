@@ -9,11 +9,10 @@ public:
         entityVector.push_back(id);
         return id;
     }
+    
     const std::vector<Entity>& getEntities() const {
         return entityVector;
     }
-
-
 private:
     std::vector<Entity> entityVector;
     Entity nextEntityId = 0;
