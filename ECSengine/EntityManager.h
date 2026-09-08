@@ -1,24 +1,22 @@
 #pragma once
-#include <iostream>
 #include <vector>
-#include "ComponentManager.h"
-using Entity = uint32_t;
+#include <algorithm>
+#include "Entity.h"
 class EntityManager {
 public:
-    Entity createEntity() {
+    Entity CreateEntity() {
         Entity id = nextEntityId++;
         entityVector.push_back(id);
         return id;
     }
     
-    void removeEntity(Entity entity, ComponentManager& componentManager) {
+    void RemoveEntity(Entity entity) {
         auto it = std::find(entityVector.begin(), entityVector.end(), entity);
         if (it != entityVector.end()) {
-			componentManager.RemoveEntity(entity);
             entityVector.erase(it);
         }
     }
-    const std::vector<Entity>& getEntities() const {
+    const std::vector<Entity>& GetEntities() const {
         return entityVector;
     }
 private:

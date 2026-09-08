@@ -19,6 +19,8 @@ FetchContent_Declare(
     GIT_TAG 5.5
 )
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 FetchContent_MakeAvailable(raylib)
 
 # Uwzględnij podprojekty.

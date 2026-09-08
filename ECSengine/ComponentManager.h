@@ -1,15 +1,13 @@
 #pragma once
-#include<iostream>
-#include "ComponentArray.h"
 #include <unordered_map>
 #include <typeindex>
 #include <memory>
-#include "EntityManager.h"
+#include "ComponentArray.h"
 
 class ComponentManager {
 public:
     template<typename T>
-    void AddComponent(T component, Entity entity) {
+    void AddComponent(Entity entity, T component) {
 		ComponentArray<T>* arr = RequireComponentArray<T>();
 		arr->Add(entity, component); 
     }
@@ -34,7 +32,7 @@ public:
 
 	}
 
-    void RemoveEntity(Entity entity) {
+    void RemoveAllComponents(Entity entity) {
         for (auto& pair : componentArrays) {
             pair.second->Remove(entity);
 		}

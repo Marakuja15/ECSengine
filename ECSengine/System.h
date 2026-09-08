@@ -1,8 +1,8 @@
 #pragma once
-#include "EntityManager.h"
-#include "ComponentManager.h"
+#include "World.h"
+class World;
 class ISystem {
 public:
 	virtual ~ISystem() = default;
-	virtual void Update(EntityManager &entityManager, ComponentManager &componentManager) = 0;
+	virtual void Update(World &world) = 0;
 };

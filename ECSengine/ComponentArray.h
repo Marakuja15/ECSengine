@@ -1,6 +1,6 @@
 #pragma once
-#include<unordered_map>
-#include"EntityManager.h"
+#include <unordered_map>
+#include "Entity.h"
 class IComponentArray {
 public:
 	virtual ~IComponentArray() = default;
