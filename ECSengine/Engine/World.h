@@ -41,7 +41,14 @@ public:
 		}
 		return result;
 	}
+	void SetDeltaTime(float dt) {
+		deltaTime = dt;
+	}
+	const float GetDeltaTime() const {
+		return deltaTime;
+	}
 private:
 	EntityManager entityManager;
 	ComponentManager componentManager;
+	float deltaTime = 0.0f;
 };
